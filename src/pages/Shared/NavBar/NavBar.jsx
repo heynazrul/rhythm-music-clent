@@ -42,8 +42,8 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
     </>
   );
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="navbar bg-base-100 h-24">
+    <div className="bg-base-100 sticky top-0 z-50">
+      <div className="navbar  h-24 max-w-7xl mx-auto">
         <div className="navbar-start">
           <div>
             <Link

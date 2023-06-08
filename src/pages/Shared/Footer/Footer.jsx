@@ -23,7 +23,7 @@ const Footer = ({ currentTheme }) => {
             Providing music lessons since 2012
           </p>
         </div>
-
+        {/* TODO: update footer menu link and social icons */}
         <div>
           <span className="footer-title">Services</span>
           <Link className="link link-hover">Branding</Link>
@@ -62,7 +62,7 @@ const Footer = ({ currentTheme }) => {
             <p>Copyright © 2023 - All right reserved</p>
           </div>
           <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-            <Link to={"#"}>
+            <Link to={'#'}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

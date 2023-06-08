@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { themeChange } from 'theme-change';
 
-const ThemeChanger = () => {
+const ThemeChanger = ({ setCurrentTheme }) => {
   const themeValues = ['Themes', 'Light', 'Dracula', 'Bumblebee', 'Dark', 'Cupcake'];
   useEffect(() => {
     themeChange(false);
@@ -10,7 +10,8 @@ const ThemeChanger = () => {
     <>
       <select
         className="select select-bordered select-sm  max-w-xs"
-        data-choose-theme>
+        data-choose-theme
+        onChange={(e) => setCurrentTheme(e.target.value)}>
         {themeValues.map((value, idx) => {
           const isFirstItem = idx === 0;
 

@@ -23,7 +23,7 @@ export default {
 
           'base-100': '#fcfcfd',
 
-          info: '#a3cdef',
+          info: '#3b5ec9',
 
           success: '#1fc76a',
 

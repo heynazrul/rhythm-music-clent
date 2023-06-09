@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const InstructorCard = () => {
   return (
     <div className="hover:cursor-pointer">
+      {/* TODO: add group hover */}
       <div className="w-44 h-44 mx-auto border border-secondary hover:border-8 rounded-full hover:p-0 p-2 transition-all ">
         <img
           src={'https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg'}

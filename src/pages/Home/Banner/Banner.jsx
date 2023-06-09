@@ -66,7 +66,9 @@ const Banner = () => {
         </SwiperSlide>
 
         {/* Banner title */}
-        <div className="absolute w-1/2 left-1/3 top-1/3 z-20 text-center space-y-3">
+        <div
+          id="banner-title"
+          className=" w-1/2  z-20 text-center space-y-3">
           <h2 className="text-5xl text-base-100 font-bold text-center h-24">
             <Typewriter
               options={{

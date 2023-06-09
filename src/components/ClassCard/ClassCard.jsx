@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const ClassCard = ({ img, name, level }) => {
   return (
     
-      <div className="card w-96 bg-base-100 shadow-xl mx-auto">
+      <div className="card max-w-96 bg-base-100 shadow-xl mx-auto">
         <figure>
           <img
             src="http://notacorda.like-themes.com/wp-content/uploads/2017/10/Class_1-770x440.jpg"

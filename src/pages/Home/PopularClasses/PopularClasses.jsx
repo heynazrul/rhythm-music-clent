@@ -8,7 +8,7 @@ const PopularClasses = () => {
         <SectionTitle
           heading={'Featured on this month'}
           subHeading={'popular classes'}></SectionTitle>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6">
           <ClassCard></ClassCard>
           <ClassCard></ClassCard>
           <ClassCard></ClassCard>

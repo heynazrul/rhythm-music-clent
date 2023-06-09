@@ -21,23 +21,23 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
       <li>
         <NavLink
           to={'/'}
-          className={({ isActive }) => isActive && 'bg-secondary font-semibold'}>
+          className={({ isActive }) => (isActive ? 'bg-secondary font-semibold' : '')}>
           Home
         </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to={'/instructors'}
-          className={({ isActive }) => isActive && 'bg-secondary font-semibold'}>
+          className={({ isActive }) => (isActive ? 'bg-secondary font-semibold' : '')}>
           Instructors
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to={'/classes'}
-          className={({ isActive }) => isActive && 'bg-secondary font-semibold'}>
+          className={({ isActive }) => (isActive ? 'bg-secondary font-semibold' : '')}>
           Classes
-        </Link>
+        </NavLink>
       </li>
     </>
   );

@@ -18,8 +18,8 @@ const ThemeChanger = ({ setCurrentTheme }) => {
           return (
             <option
               className="text-primary"
-              key={value.toLowerCase()}
-              value={isFirstItem ? 'default' : value.toLowerCase()}>
+              key={value?.toLowerCase()}
+              value={isFirstItem ? 'default' : value?.toLowerCase()}>
               {value}
             </option>
           );

@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import loginAnimation from '../../assets/lottie/login-animation.json';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
-  const handleLogin = () => {};
+
+  const { signIn } = useAuth();
+
+  const handleLogin = () => {
+
+    signIn();
+  };
   return (
     <>
       <Helmet>

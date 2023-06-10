@@ -10,7 +10,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = (data) => {

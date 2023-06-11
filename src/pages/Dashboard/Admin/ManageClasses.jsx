@@ -1,9 +1,14 @@
+import { Helmet } from 'react-helmet-async';
 import { FaCheckCircle, FaEnvelope } from 'react-icons/fa';
 import { MdError, MdFeedback } from 'react-icons/md';
 
 const ManageClasses = () => {
   return (
     <div className="overflow-x-auto w-full px-4">
+      <Helmet>
+        <title>Rhythm | Manage Classes</title>
+      </Helmet>
+      <h2 className="text-center font-bold text-3xl my-5">Manage Classes</h2>
       <table className="table">
         {/* head */}
         <thead className="bg-base-200  uppercase">

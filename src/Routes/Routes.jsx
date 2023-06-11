@@ -14,6 +14,7 @@ import MyClasses from '../pages/Dashboard/Instructor/MyClasses';
 import ManageClasses from '../pages/Dashboard/Admin/ManageClasses';
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +40,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'classes',
-        element: <Classes></Classes>,
+        element: (
+          <PrivateRoute>
+            <Classes></Classes>
+          </PrivateRoute>
+        ),
       },
     ],
   },

@@ -31,28 +31,57 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
       <li>
         <NavLink
           to={'/'}
-          className={({ isActive }) => (isActive ? 'bg-secondary font-semibold' : '')}>
+          className={({ isActive }) => (isActive && 'bg-secondary font-semibold')}>
           Home
         </NavLink>
       </li>
       <li>
         <NavLink
           to={'/instructors'}
-          className={({ isActive }) => (isActive ? 'bg-secondary font-semibold' : '')}>
+          className={({ isActive }) => (isActive && 'bg-secondary font-semibold' )}>
           Instructors
         </NavLink>
       </li>
       <li>
         <NavLink
           to={'/classes'}
-          className={({ isActive }) => (isActive ? 'bg-secondary font-semibold' : '')}>
+          className={({ isActive }) => (isActive && 'bg-secondary font-semibold' )}>
           Classes
         </NavLink>
       </li>
     </>
   );
+
+  const userNavItem = (
+    <>
+      {user && (
+        <Link
+          to={'/dashboard'}
+          className="btn btn-neutral btn-sm ">
+          Dashboard
+        </Link>
+      )}
+
+      {/* Conditional Login button */}
+      {user ? (
+        <>
+          <Link
+            onClick={handleLogOut}
+            className="btn btn-primary btn-sm">
+            Logout
+          </Link>
+        </>
+      ) : (
+        <Link
+          to={'/login'}
+          className="btn btn-primary btn-sm ml-2">
+          Login
+        </Link>
+      )}
+    </>
+  );
   return (
-    <div className="bg-base-100 sticky top-0 z-50">
+    <div className="bg-base-100 sticky top-0 z-50 border-b bg-opacity-95">
       <div className="navbar  h-24 max-w-7xl mx-auto">
         <div className="navbar-start">
           <div>
@@ -67,18 +96,20 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
             </Link>
           </div>
         </div>
-        <div className="navbar-center hidden md:flex">
+        <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end items-center space-x-3">
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <ThemeChanger setCurrentTheme={setCurrentTheme}></ThemeChanger>
           </div>
-          <Link
-            to={'/dashboard'}
-            className="btn btn-neutral btn-sm ml-2">
-            Dashboard
-          </Link>
+          {user && (
+            <Link
+              to={'/dashboard'}
+              className="btn btn-neutral btn-sm hidden lg:inline-flex">
+              Dashboard
+            </Link>
+          )}
 
           {/* Conditional User Profile */}
           {user && (
@@ -106,7 +137,7 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
             <>
               <Link
                 onClick={handleLogOut}
-                className="btn btn-primary btn-sm ml-2">
+                className="btn btn-primary btn-sm ml-2 hidden lg:inline-flex">
                 Logout
               </Link>
             </>
@@ -124,7 +155,7 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
             ref={dropdown}>
             <label
               tabIndex={0}
-              className="swap swap-rotate md:hidden">
+              className="swap swap-rotate lg:hidden">
               <input
                 onChange={handleMenuOpen}
                 type="checkbox"
@@ -169,10 +200,10 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
             </label> */}
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 md:hidden ">
+              className="menu menu-sm space-y-2 dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 lg:hidden ">
               {navItems}
-
               <ThemeChanger setCurrentTheme={setCurrentTheme}></ThemeChanger>
+              {userNavItem}
             </ul>
           </div>
         </div>

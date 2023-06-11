@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FaEnvelope } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -16,10 +15,22 @@ const ManageUsers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.modifiedCount);
         if (data.modifiedCount) {
           refetch();
           toast.success(`Made ${user.name} an Admin`);
+        }
+      });
+  };
+
+  const handleMakeInstructor = (user) => {
+    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+      method: 'PATCH',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          toast.success(`Made ${user.name} an Instructor`);
         }
       });
   };
@@ -70,10 +81,22 @@ const ManageUsers = () => {
                 </p>
               </td>
               <td>
-                <div className={`badge ${user.role ==='admin' && 'badge-primary' || user.role ==='instructor' && 'badge-secondary' || user.role=== 'student' && 'badge-accent' }`}>{user.role}</div>
+                <div
+                  className={`badge ${
+                    (user.role === 'admin' && 'badge-primary') ||
+                    (user.role === 'instructor' && 'badge-secondary') ||
+                    (user.role === 'student' && 'badge-accent')
+                  }`}>
+                  {user.role}
+                </div>
               </td>
               <th className="space-x-2">
-                <button className="btn btn-secondary btn-sm">Make Instructor</button>
+                <button
+                  onClick={() => handleMakeInstructor(user)}
+                  disabled={user.role === 'instructor' && true}
+                  className="btn btn-secondary btn-sm">
+                  Make Instructor
+                </button>
                 <button
                   onClick={() => handleMakeAdmin(user)}
                   disabled={user.role === 'admin' && true}

@@ -5,10 +5,20 @@ import ThemeChanger from '../../../components/theme-changer/ThemeChanger';
 import logoLight from '../../../assets/logo/logo-light.svg';
 import logoDark from '../../../assets/logo/logo-dark.svg';
 import { useRef, useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+import { FaUserCircle } from 'react-icons/fa';
 
 const NavBar = ({ setCurrentTheme, currentTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdown = useRef();
+
+  const { user, logOut } = useAuth();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
 
   const handleMenuOpen = () => {
     dropdown.current.classList.toggle('dropdown-open');
@@ -60,7 +70,7 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
         <div className="navbar-center hidden md:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
-        <div className="navbar-end items-center">
+        <div className="navbar-end items-center space-x-3">
           <div className="hidden md:block">
             <ThemeChanger setCurrentTheme={setCurrentTheme}></ThemeChanger>
           </div>
@@ -69,11 +79,44 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
             className="btn btn-neutral btn-sm ml-2">
             Dashboard
           </Link>
-          <Link
-            to={'/login'}
-            className="btn btn-primary btn-sm ml-2">
-            Login
-          </Link>
+
+          {/* Conditional User Profile */}
+          {user && (
+            <Link
+              to={'/'}
+              className="inline-block">
+              <div
+                className="avatar tooltip  tooltip-bottom"
+                data-tip={`${user?.displayName ? user.displayName : ''}`}>
+                <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 ">
+                  {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt=""
+                    />
+                  ) : (
+                    <FaUserCircle size={32}></FaUserCircle>
+                  )}
+                </div>
+              </div>
+            </Link>
+          )}
+          {/* Conditional Login button */}
+          {user ? (
+            <>
+              <Link
+                onClick={handleLogOut}
+                className="btn btn-primary btn-sm ml-2">
+                Logout
+              </Link>
+            </>
+          ) : (
+            <Link
+              to={'/login'}
+              className="btn btn-primary btn-sm ml-2">
+              Login
+            </Link>
+          )}
 
           {/* Mobile Menu */}
           <div

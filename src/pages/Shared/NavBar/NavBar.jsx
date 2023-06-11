@@ -65,10 +65,16 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
             <ThemeChanger setCurrentTheme={setCurrentTheme}></ThemeChanger>
           </div>
           <Link
+            to={'/dashboard'}
+            className="btn btn-neutral btn-sm ml-2">
+            Dashboard
+          </Link>
+          <Link
             to={'/login'}
             className="btn btn-primary btn-sm ml-2">
             Login
           </Link>
+
           {/* Mobile Menu */}
           <div
             className="dropdown dropdown-end ml-2 "

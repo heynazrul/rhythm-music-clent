@@ -11,7 +11,10 @@ const ThemeChanger = ({ setCurrentTheme }) => {
       <select
         className="select select-bordered select-sm  max-w-xs"
         data-choose-theme
-        onChange={(e) => setCurrentTheme(e.target.value)}>
+        onChange={(e) => {
+          console.log(e.target.value);
+          setCurrentTheme(e.target.value);
+        }}>
         {themeValues.map((value, idx) => {
           const isFirstItem = idx === 0;
 

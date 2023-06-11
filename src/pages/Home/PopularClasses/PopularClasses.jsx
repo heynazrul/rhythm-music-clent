@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ClassCard from "../../../components/ClassCard/ClassCard";
+import ClassCard from "../../../components/PopularClassCard/PopularClassCard";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const PopularClasses = () => {

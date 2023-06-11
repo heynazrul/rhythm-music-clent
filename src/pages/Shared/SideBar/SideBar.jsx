@@ -10,11 +10,14 @@ import { IoMdClose } from 'react-icons/io';
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  
+  // TODO: load data from server to have dynamic isAdmin
+  const isAdmin = true;
 
   const adminNavItems = [
     {
-      to: '/',
-      title: 'Dashboard',
+      to: '/dashboard/admin-home',
+      title: 'Admin Dashboard',
       icon: <AiFillHome></AiFillHome>,
     },
     {
@@ -71,7 +74,7 @@ const SideBar = () => {
   ];
   return (
     <Sidebar
-      className='bg-base-200'
+      className="bg-base-200"
       collapsed={collapsed}>
       <Menu
         menuItemStyles={{

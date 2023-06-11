@@ -15,6 +15,7 @@ import ManageClasses from '../pages/Dashboard/Admin/ManageClasses';
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import PrivateRoute from './PrivateRoute';
+import AdminHome from '../pages/Dashboard/Admin/AdminHome';
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
     path: 'dashboard',
     element: <DashboardLayout></DashboardLayout>,
     children: [
+      {
+        path: '/dashboard/admin-home',
+        element: <AdminHome></AdminHome>,
+      },
       {
         path: '/dashboard/manage-classes',
         element: <ManageClasses></ManageClasses>,

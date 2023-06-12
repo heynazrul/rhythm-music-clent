@@ -66,10 +66,20 @@ const MyClasses = () => {
                 <p className="font-semibold">{item.enrolled}</p>
               </td>
               <td>
-                <p className="">{ (item.status === 'pending' || item.status === 'approved') && (item?.feedback ? item.feedback : 'N/A') }</p>
+                <p className="">
+                  {item.status === 'pending' || item.status === 'approved'
+                    ? ''
+                    : item?.feedback
+                    ? item.feedback
+                    : 'N/A'}
+                </p>
               </td>
               <th className="space-x-2">
-                <Link to={'/update-class'} className="btn btn-accent btn-xs">Update</Link>
+                <Link
+                  to={'/update-class'}
+                  className="btn btn-accent btn-xs">
+                  Update
+                </Link>
               </th>
             </tr>
           ))}

@@ -29,22 +29,28 @@ const ManageClasses = () => {
     });
   };
 
-  
-  const handleFeedback = async (item) => {
-    const { value: text } = await Swal.fire({
-      input: 'textarea',
-      inputLabel: 'Message',
-      inputPlaceholder: 'Type your message here...',
-      inputAttributes: {
-        'aria-label': 'Type your message here',
-      },
+  const handleFeedback = (item) => {
+    Swal.fire({
+      title: 'Enter your feedback',
+      html: '<textarea id="message" rows="4" cols="40" class="border bg-gray-100 border-gray-700 p-2 rounded-md"></textarea>',
       showCancelButton: true,
-    });
+      confirmButtonText: 'Submit',
+      preConfirm: () => {
+        const message = Swal.getPopup().querySelector('#message').value;
+        return message;
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const message = result.value;
 
-    if (text) {
-      console.log(text);
-      Swal.fire(text);
-    }
+        axiosSecure.patch(`/classes/feedback/${item._id}`, { feedback: message }).then((res) => {
+          if (res.data.modifiedCount) {
+            refetch();
+            toast.success(`Feedback sent`);
+          }
+        });
+      }
+    });
   };
 
   return (

@@ -17,6 +17,7 @@ import ManageUsers from '../pages/Dashboard/Admin/ManageUsers';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
+import StudentRoute from './StudentRoute';
 import AdminHome from '../pages/Dashboard/Admin/AdminHome';
 import InstructorRoute from './InstructorRoute';
 
@@ -103,7 +104,11 @@ export const router = createBrowserRouter([
       // Student Route
       {
         path: '/dashboard/selected-classes',
-        element: <SelectedClasses></SelectedClasses>,
+        element: (
+          <StudentRoute>
+            <SelectedClasses></SelectedClasses>
+          </StudentRoute>
+        ),
       },
       {
         path: '/dashboard/enrolled-classes',

@@ -24,7 +24,7 @@ const SideBar = () => {
   const [isInstructor] = useInstructor();
   console.log('instructor', isInstructor);
 
-  const isStudent = useStudent();
+  const [isStudent] = useStudent()
   console.log('student', isStudent);
 
   const adminNavItems = [
@@ -47,8 +47,8 @@ const SideBar = () => {
 
   const studentNavItems = [
     {
-      to: '/',
-      title: 'Dashboard',
+      to: '/dashboard/student-home',
+      title: 'Student Dashboard',
       icon: <AiFillHome></AiFillHome>,
     },
     {

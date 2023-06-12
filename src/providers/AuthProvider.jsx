@@ -52,16 +52,16 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
+      console.log('current user ', currentUser);
 
       if (currentUser) {
-        axios.post('http://localhost:5000/jwt', { email: currentUser.email }).then((data) => {
+        axios.post('http://localhost:5000/jwt', { email: currentUser?.email }).then((data) => {
           localStorage.setItem('access-token', data.data.token);
           setLoading(false);
         });
       } else {
         localStorage.removeItem('access-token');
-        setLoading(false)
+        // setLoading(false)
       }
     });
     return () => {
@@ -69,11 +69,12 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  console.log('loading from auth' ,loading);
+  console.log('loading from auth', loading);
 
   const authInfo = {
     user,
     loading,
+    setLoading,
     createUser,
     signIn,
     googleSignIn,

@@ -1,62 +1,84 @@
-import { Helmet } from "react-helmet-async";
-import { FaEnvelope } from "react-icons/fa";
+import { Helmet } from 'react-helmet-async';
+import { FaEnvelope } from 'react-icons/fa';
 import { BsFillCreditCard2BackFill } from 'react-icons/bs';
-import { MdError } from "react-icons/md";
-
+import { MdError } from 'react-icons/md';
+import useUser from '../../../hooks/useUser';
+import useClass from '../../../hooks/useClass';
+import useAuth from '../../../hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
 
 const SelectedClasses = () => {
-    return (
-      <div className="overflow-x-auto w-full px-4">
-        <Helmet>
-          <title>Rhythm | My Selected Classes</title>
-        </Helmet>
-        <h2 className="text-center font-bold text-3xl my-5">My Selected Classes</h2>
-        <table className="table">
-          {/* head */}
-          <thead className="bg-base-200  uppercase">
-            <tr>
-              <th>#</th>
-              <th>Image</th>
-              <th>Class Name</th>
-              <th>Instructor</th>
-              <th>Seats</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr>
-              <th>1</th>
+  const { user } = useAuth();
+
+  const { data: classes = [], refetch } = useQuery(['classes'], async () => {
+    const res = await fetch(`http://localhost:5000/users/selectedClassId/${user.email}`);
+    return res.json();
+  });
+
+
+  return (
+    <div className="overflow-x-auto w-full px-4">
+      <Helmet>
+        <title>Rhythm | My Selected Classes</title>
+      </Helmet>
+      <h2 className="text-center font-bold text-3xl my-5">My Selected Classes</h2>
+      <table className="table">
+        {/* head */}
+        <thead className="bg-base-200  uppercase">
+          <tr>
+            <th>#</th>
+            <th>Image</th>
+            <th>Class Name</th>
+            <th>Instructor</th>
+            <th>Seats</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {classes.map((item, idx) => (
+            <tr key={item._id}>
+              <th>{idx + 1}</th>
               <td>
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
                     <img
-                      src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                      alt="Avatar Tailwind CSS Component"
+                      src={
+                        item.img
+                          ? item.img
+                          : 'https://mobilemusiclessons.ca/wp-content/webpc-passthru.php?src=https://mobilemusiclessons.ca/wp-content/uploads/2021/09/no-image-650x433.jpg&nocache=1.webp'
+                      }
+                      alt={item.name}
                     />
                   </div>
                 </div>
               </td>
               <td>
-                <p className="font-bold">Guitar shedding 1010</p>
+                <p className="font-bold">{item.name}</p>
               </td>
               <td>
-                <p className="font-semibold">Dummy inst Name</p>
+                <p className="font-semibold">{item.instructorName}</p>
                 <p className="flex gap-2 items-center">
                   <FaEnvelope></FaEnvelope>
-                  <span>demo@demo.com</span>
+                  <span>{item.email}</span>
                 </p>
               </td>
               <td>
-                <p>20</p>
+                <p className="font-semibold">{item.seats}</p>
               </td>
               <td>
-                <p className="text-center font-semibold">${120}</p>
+                <p className="text-center font-semibold">${item.price}</p>
               </td>
               <td>
-                <div className="badge badge-ghost">pending</div>
+                <div
+                  className={`badge ${
+                    (item.status === 'pending' && 'badge-secondary') ||
+                    (item.status === 'approved' && 'badge-success') ||
+                    (item.status === 'denied' && 'badge-error')
+                  }`}>
+                  {item.status}
+                </div>
               </td>
               <th className="space-x-2">
                 <button className="btn btn-info btn-sm">
@@ -65,13 +87,13 @@ const SelectedClasses = () => {
                 <button className="btn btn-error btn-sm">
                   <MdError></MdError> Delete
                 </button>
-                
               </th>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    );
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default SelectedClasses;

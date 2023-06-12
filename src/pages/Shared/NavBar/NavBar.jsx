@@ -7,16 +7,22 @@ import logoDark from '../../../assets/logo/logo-dark.svg';
 import { useRef, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { FaUserCircle } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const NavBar = ({ setCurrentTheme, currentTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdown = useRef();
+  // const navigate = useNavigate()
 
-  const { user, logOut } = useAuth();
+  const { user, logOut, setLoading } = useAuth();
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        toast.success('Logged Out!');
+        setLoading(false);
+        // navigate('/', {replace: true})
+      })
       .catch((error) => console.log(error));
   };
 
@@ -31,21 +37,21 @@ const NavBar = ({ setCurrentTheme, currentTheme }) => {
       <li>
         <NavLink
           to={'/'}
-          className={({ isActive }) => (isActive && 'bg-secondary font-semibold')}>
+          className={({ isActive }) => isActive && 'bg-secondary font-semibold'}>
           Home
         </NavLink>
       </li>
       <li>
         <NavLink
           to={'/instructors'}
-          className={({ isActive }) => (isActive && 'bg-secondary font-semibold' )}>
+          className={({ isActive }) => isActive && 'bg-secondary font-semibold'}>
           Instructors
         </NavLink>
       </li>
       <li>
         <NavLink
           to={'/classes'}
-          className={({ isActive }) => (isActive && 'bg-secondary font-semibold' )}>
+          className={({ isActive }) => isActive && 'bg-secondary font-semibold'}>
           Classes
         </NavLink>
       </li>

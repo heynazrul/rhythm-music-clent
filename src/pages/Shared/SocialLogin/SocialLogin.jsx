@@ -27,6 +27,7 @@ const SocialLogin = () => {
           email: loggedInUser.email,
           photoURL: loggedInUser.photoURL,
           role: 'student',
+          selectedClassId: [],
         };
         fetch('http://localhost:5000/users', {
           method: 'POST',

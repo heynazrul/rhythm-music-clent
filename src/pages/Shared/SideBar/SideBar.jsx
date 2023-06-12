@@ -10,10 +10,11 @@ import { IoMdClose } from 'react-icons/io';
 import useAdmin from '../../../hooks/useAdmin';
 import useInstructor from '../../../hooks/useInstructor';
 import useAuth from '../../../hooks/useAuth';
+import useStudent from '../../../hooks/useStudent';
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const {user} = useAuth()
+  const { user } = useAuth();
 
   // TODO: load data from server to have dynamic isAdmin
   // const isAdmin = true;
@@ -23,7 +24,7 @@ const SideBar = () => {
   const [isInstructor] = useInstructor();
   console.log('instructor', isInstructor);
 
-  const isStudent = true;
+  const isStudent = useStudent();
   console.log('student', isStudent);
 
   const adminNavItems = [
@@ -120,7 +121,9 @@ const SideBar = () => {
               />
             </div>
           </div>
-          <h2 className="text-center font-semibold text-lg mt-3">Hello, { user?.displayName ? user.displayName : 'User'} </h2>
+          <h2 className="text-center font-semibold text-lg mt-3">
+            Hello, {user?.displayName ? user.displayName : 'User'}{' '}
+          </h2>
         </div>
         <div className="divider"></div>
         {isAdmin &&

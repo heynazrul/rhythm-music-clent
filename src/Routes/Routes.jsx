@@ -71,7 +71,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/manage-users',
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
 
       // Instructor Route
@@ -81,7 +85,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/add-class',
-        element: <AddClass></AddClass>,
+        element: (
+          <InstructorRoute>
+            <AddClass></AddClass>
+          </InstructorRoute>
+        ),
       },
       {
         path: '/dashboard/my-classes',

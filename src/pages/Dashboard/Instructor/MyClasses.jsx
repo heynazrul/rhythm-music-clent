@@ -1,6 +1,10 @@
 import { Helmet } from 'react-helmet-async';
+import useClass from '../../../hooks/useClass';
+import { Link } from 'react-router-dom';
 
 const MyClasses = () => {
+  const [classes, , refetch] = useClass();
+
   return (
     <div className="overflow-x-auto w-full px-4">
       <Helmet>
@@ -23,42 +27,52 @@ const MyClasses = () => {
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img
-                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                    alt="Avatar Tailwind CSS Component"
-                  />
+          {classes.map((item, idx) => (
+            <tr key={item._id}>
+              <th>{idx + 1}</th>
+              <td>
+                <div className="avatar">
+                  <div className="mask mask-squircle w-12 h-12">
+                    <img
+                      src={
+                        item.img
+                          ? item.img
+                          : 'https://mobilemusiclessons.ca/wp-content/webpc-passthru.php?src=https://mobilemusiclessons.ca/wp-content/uploads/2021/09/no-image-650x433.jpg&nocache=1.webp'
+                      }
+                    />
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <p className="font-bold">Guitar shedding 1010</p>
-            </td>
-
-            <td>
-              <p className="font-semibold">20</p>
-            </td>
-            <td>
-              <p className="font-semibold">${120}</p>
-            </td>
-            <td>
-              <div className="badge badge-ghost">pending</div>
-            </td>
-            <td>
-              <p className="font-semibold">20</p>
-            </td>
-            <td>
-              <p className="">N/A</p>
-            </td>
-            <th className="space-x-2">
-              <button className="btn btn-accent btn-xs">Update</button>
-            </th>
-          </tr>
+              </td>
+              <td>
+                <p className="font-bold">{item.name}</p>
+              </td>
+              <td>
+                <p className="font-semibold">{item.seats}</p>
+              </td>
+              <td>
+                <p className="font-semibold">${item.price}</p>
+              </td>
+              <td>
+                <div
+                  className={`badge ${
+                    (item.status === 'pending' && 'badge-secondary') ||
+                    (item.status === 'approved' && 'badge-success') ||
+                    (item.status === 'denied' && 'badge-error')
+                  }`}>
+                  {item.status}
+                </div>
+              </td>
+              <td>
+                <p className="font-semibold">{item.enrolled}</p>
+              </td>
+              <td>
+                <p className="">{ (item.status === 'pending' || item.status === 'approved') && (item?.feedback ? item.feedback : 'N/A') }</p>
+              </td>
+              <th className="space-x-2">
+                <Link to={'/update-class'} className="btn btn-accent btn-xs">Update</Link>
+              </th>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

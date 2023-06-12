@@ -20,7 +20,7 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
-  const { signIn } = useAuth();
+  const { signIn,  } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -77,7 +77,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  {...register('name', { required: 'Email is require' })}
+                  {...register('email', { required: 'Email is require' })}
                   placeholder="Email"
                   className="input input-bordered"
                 />

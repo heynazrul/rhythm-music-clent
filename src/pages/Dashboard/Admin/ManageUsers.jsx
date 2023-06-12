@@ -6,35 +6,39 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const ManageUsers = () => {
   const [axiosSecure] = useAxiosSecure();
+
   const { data: users = [], refetch } = useQuery(['users'], async () => {
     const res = await axiosSecure.get('/users');
     return res.data;
   });
 
   const handleMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
-      method: 'PATCH',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          refetch();
-          toast.success(`Made ${user.name} an Admin`);
-        }
-      });
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+        toast.success(`Made ${user.name} an Admin`);
+      }
+    });
   };
 
   const handleMakeInstructor = (user) => {
-    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
-      method: 'PATCH',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          refetch();
-          toast.success(`Made ${user.name} an Instructor`);
-        }
-      });
+    axiosSecure.patch(`/users/instructor/${user._id}`).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+        toast.success(`Made ${user.name} an Instructor`);
+      }
+    });
+
+    // fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+    //   method: 'PATCH',
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.modifiedCount) {
+    //       refetch();
+    //       toast.success(`Made ${user.name} an Instructor`);
+    //     }
+    //   });
   };
 
   return (

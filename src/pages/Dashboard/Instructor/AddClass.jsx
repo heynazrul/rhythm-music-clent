@@ -25,6 +25,7 @@ const AddClass = () => {
       seats: data.seats,
       price: parseFloat(data.price),
       status: 'pending',
+      enrolled: 0,
     };
     // secured api call to backend
     axiosSecure.post('/classes', newClass).then((data) => {
@@ -64,11 +65,10 @@ const AddClass = () => {
 
           <input
             type="text"
-            {...register('img', { required: 'Image is required' })}
+            {...register('img')}
             placeholder="Image URL"
             className="input input-bordered"
           />
-          {errors.img && errors.img.type === 'required' && <span className="text-error">{errors.img.message}</span>}
         </div>
         <div className="form-control">
           <label className="label">

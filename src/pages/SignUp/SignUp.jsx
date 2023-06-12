@@ -59,7 +59,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         const message = error.message.split('/')[1].split(')')[0];
-        // toast.error(message);
+        console.log(error);
         toast.update(toastPromise, {
           render: message,
           type: 'error',
@@ -110,7 +110,7 @@ const SignUp = () => {
                 <input
                   type="email"
                   name="email"
-                  {...register('name', { required: 'Email is require' })}
+                  {...register('email', { required: 'Email is require' })}
                   placeholder="Email"
                   className="input input-bordered"
                 />

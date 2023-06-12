@@ -7,12 +7,21 @@ import { MdPayments, MdAssignmentAdd } from 'react-icons/md';
 import { RiListSettingsFill } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdClose } from 'react-icons/io';
+import useAdmin from '../../../hooks/useAdmin';
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  
+
   // TODO: load data from server to have dynamic isAdmin
-  const isAdmin = true;
+  // const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
+
+  const isInstructor = false;
+  console.log(isInstructor);
+
+  const isStudent = false;
+  console.log(isStudent);
 
   const adminNavItems = [
     {
@@ -74,13 +83,11 @@ const SideBar = () => {
   ];
   return (
     <Sidebar
-      className="bg-base-200"
+      className="bg-base-200 h-[calc(100vh-150px)]"
       collapsed={collapsed}>
       <Menu
         menuItemStyles={{
           button: {
-            // the active class will be added automatically by react router
-            // so we can use it to style the active menu item
             [`&.active`]: {
               backgroundColor: '#13395e',
               color: '#b6c8d9',
@@ -105,30 +112,34 @@ const SideBar = () => {
           <h2 className="text-center font-bold text-xl mt-3">Hello Naz</h2>
         </div>
         <div className="divider"></div>
-        {adminNavItems.map((item, idx) => (
-          <MenuItem
-            key={idx}
-            icon={item.icon}
-            component={<NavLink to={item.to}></NavLink>}>
-            {item.title}
-          </MenuItem>
-        ))}
-        {instructorNavItems.map((item, idx) => (
-          <MenuItem
-            key={idx}
-            icon={item.icon}
-            component={<NavLink to={item.to}></NavLink>}>
-            {item.title}
-          </MenuItem>
-        ))}
-        {studentNavItems.map((item, idx) => (
-          <MenuItem
-            key={idx}
-            icon={item.icon}
-            component={<NavLink to={item.to}></NavLink>}>
-            {item.title}
-          </MenuItem>
-        ))}
+        {isAdmin &&
+          adminNavItems.map((item, idx) => (
+            <MenuItem
+              key={idx}
+              icon={item.icon}
+              component={<NavLink to={item.to}></NavLink>}>
+              {item.title}
+            </MenuItem>
+          ))}
+        {isInstructor &&
+          instructorNavItems.map((item, idx) => (
+            <MenuItem
+              key={idx}
+              icon={item.icon}
+              component={<NavLink to={item.to}></NavLink>}>
+              {item.title}
+            </MenuItem>
+          ))}
+
+        {isStudent &&
+          studentNavItems.map((item, idx) => (
+            <MenuItem
+              key={idx}
+              icon={item.icon}
+              component={<NavLink to={item.to}></NavLink>}>
+              {item.title}
+            </MenuItem>
+          ))}
       </Menu>
     </Sidebar>
   );

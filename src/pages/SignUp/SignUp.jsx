@@ -23,7 +23,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
-  
+
   const onSubmit = (data) => {
     const toastPromise = toast.loading('Please wait registering...');
     createUser(data.email, data.password)
@@ -110,7 +110,7 @@ const SignUp = () => {
                 <input
                   type="email"
                   name="email"
-                  {...register('email', { required: 'Email is require' })}
+                  {...register('name', { required: 'Email is require' })}
                   placeholder="Email"
                   className="input input-bordered"
                 />

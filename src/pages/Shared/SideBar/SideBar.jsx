@@ -69,8 +69,8 @@ const SideBar = () => {
 
   const instructorNavItems = [
     {
-      to: '/',
-      title: 'Dashboard',
+      to: '/dashboard/instructor-home',
+      title: 'Instructor Dashboard',
       icon: <AiFillHome></AiFillHome>,
     },
     {
@@ -99,7 +99,7 @@ const SideBar = () => {
         }}>
         {/* Control menu collapse */}
         <div className="flex items-center justify-center relative mt-6">
-          <h2 className={`text-xl text-primary font-semibold ${collapsed ? 'hidden' : 'block'}`}>
+          <h2 className={`text-xl text-primary font-bold ${collapsed ? 'hidden' : 'block'}`}>
             {(isAdmin && 'Admin') || (isInstructor && 'Instructor') || (isStudent && 'Student')}
           </h2>
           <button
@@ -120,7 +120,7 @@ const SideBar = () => {
               />
             </div>
           </div>
-          <h2 className="text-center font-bold text-xl mt-3">Hello, { user?.displayName ? user.displayName : 'User'} </h2>
+          <h2 className="text-center font-semibold text-lg mt-3">Hello, { user?.displayName ? user.displayName : 'User'} </h2>
         </div>
         <div className="divider"></div>
         {isAdmin &&

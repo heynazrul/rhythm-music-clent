@@ -24,9 +24,9 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-   const togglePasswordVisibility = () => {
-     setShowPassword((prevShowPassword) => !prevShowPassword);
-   };
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const onSubmit = (data) => {
     console.log(data);
@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>Bistro Boss | Login</title>
+        <title>Rhythm | Login</title>
       </Helmet>
       <div className="hero min-h-[calc(100vh-200px)] bg-base-100">
         <div className="hero-content w-1/2 flex-col md:flex-row shadow-2xl ">
@@ -77,7 +77,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  {...register('email', { required: 'Email is require' })}
+                  {...register('name', { required: 'Email is require' })}
                   placeholder="Email"
                   className="input input-bordered"
                 />

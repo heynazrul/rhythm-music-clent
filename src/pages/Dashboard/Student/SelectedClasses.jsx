@@ -2,8 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { FaEnvelope } from 'react-icons/fa';
 import { BsFillCreditCard2BackFill } from 'react-icons/bs';
 import { MdError } from 'react-icons/md';
-import useUser from '../../../hooks/useUser';
-import useClass from '../../../hooks/useClass';
 import useAuth from '../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 

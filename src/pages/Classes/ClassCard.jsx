@@ -53,7 +53,7 @@ const ClassCard = ({ item }) => {
   };
   return (
     <div className="card max-w-96 bg-base-100 shadow-xl mx-auto group">
-      <figure>
+      <figure className='h-64'>
         <img
           src={
             img
@@ -61,7 +61,7 @@ const ClassCard = ({ item }) => {
               : 'https://mobilemusiclessons.ca/wp-content/webpc-passthru.php?src=https://mobilemusiclessons.ca/wp-content/uploads/2021/09/no-image-650x433.jpg&nocache=1.webp'
           }
           alt={name}
-          className="group-hover:scale-110 h-64 transition-all duration-500 object-cover object-center"
+          className="group-hover:scale-110 h-full w-full transition-all duration-500 object-cover object-center"
         />
       </figure>
       <div className="card-body p-6 space-y-2">

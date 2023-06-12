@@ -1,10 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import PageCover from '../Shared/PageCover/PageCover';
 import ClassCard from './ClassCard';
-import useClass from '../../hooks/useClass';
+import { useQuery } from '@tanstack/react-query';
+
 
 const Classes = () => {
-  const [classes] = useClass();
+  const { data: classes = [],  } = useQuery(['classes'], async () => {
+    const res = await fetch(`http://localhost:5000/approved-classes`);
+    return res.json();
+  });
   return (
     <div>
       <Helmet>

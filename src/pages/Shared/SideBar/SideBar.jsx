@@ -8,20 +8,23 @@ import { RiListSettingsFill } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdClose } from 'react-icons/io';
 import useAdmin from '../../../hooks/useAdmin';
+import useInstructor from '../../../hooks/useInstructor';
+import useAuth from '../../../hooks/useAuth';
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const {user} = useAuth()
 
   // TODO: load data from server to have dynamic isAdmin
   // const isAdmin = true;
   const [isAdmin] = useAdmin();
-  console.log(isAdmin);
+  console.log('admin', isAdmin);
 
-  const isInstructor = false;
-  console.log(isInstructor);
+  const [isInstructor] = useInstructor();
+  console.log('instructor', isInstructor);
 
   const isStudent = true;
-  console.log(isStudent);
+  console.log('student', isStudent);
 
   const adminNavItems = [
     {
@@ -96,7 +99,9 @@ const SideBar = () => {
         }}>
         {/* Control menu collapse */}
         <div className="flex items-center justify-center relative mt-6">
-          <h2 className={`text-xl font-semibold ${collapsed ? 'hidden' : 'block'}`}>Admin</h2>
+          <h2 className={`text-xl text-primary font-semibold ${collapsed ? 'hidden' : 'block'}`}>
+            {(isAdmin && 'Admin') || (isInstructor && 'Instructor') || (isStudent && 'Student')}
+          </h2>
           <button
             className={`${!collapsed && 'absolute right-3'}`}
             onClick={() => setCollapsed(!collapsed)}>
@@ -106,10 +111,16 @@ const SideBar = () => {
         <div className={`${collapsed ? 'hidden' : 'mt-5 flex flex-col justify-center items-center'}`}>
           <div className="avatar">
             <div className="w-24 mask mask-squircle">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" />
+              <img
+                src={
+                  user.photoURL
+                    ? user.photoURL
+                    : 'https://www.belizeplanners.org/wp-content/uploads/2016/01/male-placeholder.jpg'
+                }
+              />
             </div>
           </div>
-          <h2 className="text-center font-bold text-xl mt-3">Hello Naz</h2>
+          <h2 className="text-center font-bold text-xl mt-3">Hello, { user?.displayName ? user.displayName : 'User'} </h2>
         </div>
         <div className="divider"></div>
         {isAdmin &&

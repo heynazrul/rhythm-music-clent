@@ -4,7 +4,7 @@ import loaderAnimation from '../assets/lottie/loader.json';
 import Lottie from 'lottie-react';
 import useAdmin from '../hooks/useAdmin';
 
-const PrivateRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isAdmin, isAdminLoading] = useAdmin()
 
@@ -31,4 +31,4 @@ const PrivateRoute = ({ children }) => {
   );
 };
 
-export default PrivateRoute;
+export default AdminRoute;

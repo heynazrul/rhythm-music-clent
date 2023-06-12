@@ -20,7 +20,7 @@ const SideBar = () => {
   const isInstructor = false;
   console.log(isInstructor);
 
-  const isStudent = false;
+  const isStudent = true;
   console.log(isStudent);
 
   const adminNavItems = [
@@ -83,7 +83,7 @@ const SideBar = () => {
   ];
   return (
     <Sidebar
-      className="bg-base-200 h-[calc(100vh-150px)]"
+      className="bg-base-200 min-h-[calc(100vh-150px)]"
       collapsed={collapsed}>
       <Menu
         menuItemStyles={{

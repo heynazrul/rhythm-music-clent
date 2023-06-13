@@ -17,7 +17,7 @@ const ClassCard = ({ item }) => {
   const { user } = useAuth();
 
   // const { data: users = [], refetch } = useQuery(['users'], async () => {
-  //   const res = await fetch('http://localhost:5000/users/check-role');
+  //   const res = await fetch('https://rhythm-music-server.vercel.app/users/check-role');
   //   return res.json();
   // });
 
@@ -42,8 +42,8 @@ const ClassCard = ({ item }) => {
     }
 
     axiosSecure.patch(`/users/selectedClassId/${user?.email}`, { classId: item._id }).then((res) => {
-      if(!user?.email){
-        return
+      if (!user?.email) {
+        return;
       }
       console.log(res.data);
       if (res.data.modifiedCount > 0) {

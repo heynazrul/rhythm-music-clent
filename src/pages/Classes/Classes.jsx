@@ -3,10 +3,9 @@ import PageCover from '../Shared/PageCover/PageCover';
 import ClassCard from './ClassCard';
 import { useQuery } from '@tanstack/react-query';
 
-
 const Classes = () => {
-  const { data: classes = [],  } = useQuery(['classes'], async () => {
-    const res = await fetch(`http://localhost:5000/approved-classes`);
+  const { data: classes = [] } = useQuery(['classes'], async () => {
+    const res = await fetch(`https://rhythm-music-server.vercel.app/approved-classes`);
     return res.json();
   });
   return (

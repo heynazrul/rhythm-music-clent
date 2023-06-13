@@ -1,7 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 import { FaEnvelope } from 'react-icons/fa';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
 
 const EnrolledClasses = () => {
+  const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+
+  const { data: classes = [] } = useQuery(['classes'], async () => {
+    const res = await axiosSecure.get(`https://rhythm-music-server.vercel.app/student/enrolled-classes/${user.email}`);
+    return res.data;
+  });
   return (
     <div className="overflow-x-auto w-full px-4">
       <Helmet>
@@ -16,38 +26,43 @@ const EnrolledClasses = () => {
             <th>Image</th>
             <th>Class Name</th>
             <th>Instructor</th>
-            <th>Payment Date</th>
+            <th>Paid</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>
-              <div className="avatar">
-                <div className="mask mask-squircle w-12 h-12">
-                  <img
-                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                    alt="Avatar Tailwind CSS Component"
-                  />
+          {classes.map((item, idx) => (
+            <tr key={item.key}>
+              <th>{idx + 1}</th>
+              <td>
+                <div className="avatar">
+                  <div className="mask mask-squircle w-12 h-12">
+                    <img
+                      src={
+                        item.img
+                          ? item.img
+                          : 'https://mobilemusiclessons.ca/wp-content/webpc-passthru.php?src=https://mobilemusiclessons.ca/wp-content/uploads/2021/09/no-image-650x433.jpg&nocache=1.webp'
+                      }
+                      alt="Avatar Tailwind CSS Component"
+                    />
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>
-              <p className="font-bold">Guitar shedding 1010</p>
-            </td>
-            <td>
-              <p className="font-semibold">Dummy inst Name</p>
-              <p className="flex gap-2 items-center">
-                <FaEnvelope></FaEnvelope>
-                <span>demo@demo.com</span>
-              </p>
-            </td>
+              </td>
+              <td>
+                <p className="font-bold">{item.name}</p>
+              </td>
+              <td>
+                <p className="font-semibold">{item.instructorName}</p>
+                <p className="flex gap-2 items-center">
+                  <FaEnvelope></FaEnvelope>
+                  <span>{item.email}</span>
+                </p>
+              </td>
 
-            <td>
-              <p className=" font-semibold">21st May 2023</p>
-            </td>
-          </tr>
+              <td>
+                <p className=" font-semibold">${item.price}</p>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

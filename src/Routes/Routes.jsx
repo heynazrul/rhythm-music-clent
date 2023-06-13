@@ -21,6 +21,7 @@ import StudentRoute from './StudentRoute';
 import AdminHome from '../pages/Dashboard/Admin/AdminHome';
 import InstructorRoute from './InstructorRoute';
 import Payment from '../pages/Dashboard/Student/Payment/Payment';
+import StudentHome from '../pages/Dashboard/Student/StudentHome';
 
 export const router = createBrowserRouter([
   {
@@ -103,7 +104,11 @@ export const router = createBrowserRouter([
       },
 
       // Student Route
-      
+      {
+        path: '/dashboard/student-home',
+        element: <StudentHome></StudentHome>,
+      },
+
       {
         path: '/dashboard/selected-classes',
         element: (

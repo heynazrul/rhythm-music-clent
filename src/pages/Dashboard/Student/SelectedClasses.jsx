@@ -9,11 +9,10 @@ import { Link } from 'react-router-dom';
 const SelectedClasses = () => {
   const { user } = useAuth();
 
-  const { data: classes = [], refetch } = useQuery(['classes'], async () => {
+  const { data: classes = [] } = useQuery(['classes'], async () => {
     const res = await fetch(`http://localhost:5000/users/selectedClassId/${user.email}`);
     return res.json();
   });
-
 
   return (
     <div className="overflow-x-auto w-full px-4">
@@ -80,7 +79,9 @@ const SelectedClasses = () => {
                 </div>
               </td>
               <th className="space-x-2">
-                <Link to={'/dashboard/payment'}>
+                <Link
+                  to={'/dashboard/payment'}
+                  state={{ item: item }}>
                   <button className="btn btn-info btn-sm">
                     <BsFillCreditCard2BackFill></BsFillCreditCard2BackFill> Pay
                   </button>

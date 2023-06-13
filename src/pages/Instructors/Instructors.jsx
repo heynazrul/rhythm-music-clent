@@ -1,8 +1,26 @@
 import { Helmet } from 'react-helmet-async';
 import PageCover from '../Shared/PageCover/PageCover';
 import InstructorCard from './InstructorCard';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
 const Instructors = () => {
+  const { data: users = [] } = useQuery(['users'], async () => {
+    const res = await fetch(`http://localhost:5000/instructors`);
+    console.log(res);
+    return res.json();
+  });
+  // const [instructors, setInstructors] = useState([]);
+
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/instructors')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setInstructors(data);
+  //     });
+  // }, []);
+
+  console.log(users);
   return (
     <div>
       <Helmet>
@@ -15,14 +33,12 @@ const Instructors = () => {
         title={'Our Skilled instructors'}
         subTitle={'Meet your life coaches'}></PageCover>
       <div className="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-12">
-        <InstructorCard></InstructorCard>
-        <InstructorCard></InstructorCard>
-        <InstructorCard></InstructorCard>
-        <InstructorCard></InstructorCard>
-        <InstructorCard></InstructorCard>
-        <InstructorCard></InstructorCard>
-        <InstructorCard></InstructorCard>
-        <InstructorCard></InstructorCard>
+        {users.map((instructor) => (
+          <InstructorCard
+            key={instructor._id}
+            instructor={instructor}></InstructorCard>
+        ))}
+
         <InstructorCard></InstructorCard>
       </div>
     </div>

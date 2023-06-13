@@ -1,20 +1,16 @@
 import { Helmet } from 'react-helmet-async';
-import { useForm } from 'react-hook-form';
+
 import CheckoutForm from './CheckoutForm';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import { useLocation } from 'react-router-dom';
 
 const Payment = () => {
-  //   const {
-  //     register,
-  //     handleSubmit,
-  //     reset,
-  //     formState: { errors },
-  //   } = useForm();
+  const location = useLocation();
+  console.log(location);
+  const { item } = location.state;
 
-  //   const onSubmit = (data) => {
-  //     console.log(data);
-  //   };
+  const price = parseFloat(item.price)
 
   const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
@@ -32,9 +28,9 @@ const Payment = () => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="text-center font-semibold text-2xl mb-6">Make Payment</h2>
+          <h2 className="text-center font-semibold text-2xl">Make Payment</h2>
           <Elements stripe={stripePromise}>
-            <CheckoutForm></CheckoutForm>
+            <CheckoutForm price={price} item={item}></CheckoutForm>
           </Elements>
           {/* <form
             onSubmit={handleSubmit(onSubmit)}

@@ -16,16 +16,14 @@ const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { user } = useAuth();
 
-  // TODO: load data from server to have dynamic isAdmin
-  // const isAdmin = true;
   const [isAdmin] = useAdmin();
-  console.log('admin', isAdmin);
+  // console.log('admin', isAdmin);
 
   const [isInstructor] = useInstructor();
-  console.log('instructor', isInstructor);
+  // console.log('instructor', isInstructor);
 
-  const [isStudent] = useStudent()
-  console.log('student', isStudent);
+  const [isStudent] = useStudent();
+  // console.log('student', isStudent);
 
   const adminNavItems = [
     {

@@ -22,7 +22,7 @@ const AddClass = () => {
       img: data.img,
       instructorName: data.instructorName,
       email: data.email,
-      seats: data.seats,
+      seats: parseInt(data.seats),
       price: parseFloat(data.price),
       status: 'pending',
       enrolled: 0,
@@ -48,7 +48,9 @@ const AddClass = () => {
         className="card-body w-1/3 mx-auto bg-base-200 rounded-md pb-6 mb-10">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Class Name</span>
+            <span className="label-text">
+              Class Name <span className="text-error">*</span>
+            </span>
           </label>
           <input
             type="text"
@@ -60,15 +62,17 @@ const AddClass = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Image URL</span>
+            <span className="label-text">
+              Image URL <span className="text-error">*</span>
+            </span>
           </label>
-
           <input
             type="text"
-            {...register('img')}
+            {...register('img', { required: 'Class image is required' })}
             placeholder="Image URL"
             className="input input-bordered"
           />
+          {errors.img && errors.img.type === 'required' && <span className="text-error">{errors.img.message}</span>}
         </div>
         <div className="form-control">
           <label className="label">
@@ -95,23 +99,33 @@ const AddClass = () => {
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Available Seats</span>
+            <span className="label-text">
+              Available Seats <span className="text-error">*</span>
+            </span>
           </label>
           <input
             type="number"
-            {...register('seats')}
+            {...register('seats', { required: 'Available seats is required' })}
             className="input input-bordered"
           />
+          {errors.seats && errors.seats.type === 'required' && (
+            <span className="text-error">{errors.seats.message}</span>
+          )}
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Price</span>
+            <span className="label-text">
+              Price <span className="text-error">*</span>
+            </span>
           </label>
           <input
             type="number"
-            {...register('price')}
+            {...register('price', { required: 'Price is required' })}
             className="input input-bordered"
           />
+          {errors.price && errors.price.type === 'required' && (
+            <span className="text-error">{errors.price.message}</span>
+          )}
         </div>
 
         <div className="form-control mt-6">

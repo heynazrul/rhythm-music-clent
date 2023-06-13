@@ -41,7 +41,10 @@ const ClassCard = ({ item }) => {
       });
     }
 
-    axiosSecure.patch(`/users/selectedClassId/${user.email}`, { classId: item._id }).then((res) => {
+    axiosSecure.patch(`/users/selectedClassId/${user?.email}`, { classId: item._id }).then((res) => {
+      if(!user?.email){
+        return
+      }
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
         toast.success(`Added to selected class`);
@@ -53,7 +56,7 @@ const ClassCard = ({ item }) => {
   };
   return (
     <div className="card max-w-96 bg-base-100 shadow-xl mx-auto group">
-      <figure className='h-64'>
+      <figure className="h-64">
         <img
           src={
             img

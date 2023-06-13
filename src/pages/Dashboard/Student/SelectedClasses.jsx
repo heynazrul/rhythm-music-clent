@@ -4,6 +4,7 @@ import { BsFillCreditCard2BackFill } from 'react-icons/bs';
 import { MdError } from 'react-icons/md';
 import useAuth from '../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const SelectedClasses = () => {
   const { user } = useAuth();
@@ -79,9 +80,11 @@ const SelectedClasses = () => {
                 </div>
               </td>
               <th className="space-x-2">
-                <button className="btn btn-info btn-sm">
-                  <BsFillCreditCard2BackFill></BsFillCreditCard2BackFill> Pay
-                </button>
+                <Link to={'/dashboard/payment'}>
+                  <button className="btn btn-info btn-sm">
+                    <BsFillCreditCard2BackFill></BsFillCreditCard2BackFill> Pay
+                  </button>
+                </Link>
                 <button className="btn btn-error btn-sm">
                   <MdError></MdError> Delete
                 </button>

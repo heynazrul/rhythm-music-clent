@@ -1,59 +1,17 @@
 import { MdFactCheck } from 'react-icons/md';
 import { BiRightArrowAlt } from 'react-icons/bi';
-import useAuth from '../../hooks/useAuth';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import useEnroll from '../../hooks/useEnroll';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { toast } from 'react-toastify';
 
 const ClassCard = ({ item }) => {
   const { img, name, instructorName, price, seats } = item;
-  const navigate = useNavigate();
-
-  const [axiosSecure] = useAxiosSecure();
-
-  const { user } = useAuth();
-
-  // const { data: users = [], refetch } = useQuery(['users'], async () => {
-  //   const res = await fetch('http://localhost:5000/users/check-role');
-  //   return res.json();
-  // });
 
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
 
-  const handleEnroll = (item) => {
-    if (!user) {
-      Swal.fire({
-        title: 'Login First!',
-        text: 'To enroll you have to login first',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Login now!',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate('/login');
-        }
-      });
-    }
+  const { handleEnroll } = useEnroll();
 
-    axiosSecure.patch(`/users/selectedClassId/${user?.email}`, { classId: item._id }).then((res) => {
-      if (!user?.email) {
-        return;
-      }
-      console.log(res.data);
-      if (res.data.modifiedCount > 0) {
-        toast.success(`Added to selected class`);
-      }
-      if (res.data.modifiedCount === 0) {
-        toast.error(`Already added to selected class`);
-      }
-    });
-  };
   return (
     <div className="card max-w-96 bg-base-100 shadow-xl mx-auto group">
       <figure className="h-64">

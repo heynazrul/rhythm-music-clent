@@ -4,9 +4,10 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import SkeletonLoader from '../../../components/SkeletonLoader/SkeletonLoader';
 
 const PopularClasses = () => {
-  const { data: classes = [] } = useQuery(['classes'], async () => {
+  const { data: classes = [], isLoading } = useQuery(['classes'], async () => {
     const res = await fetch(`http://localhost:5000/approved-classes`);
     return res.json();
   });
@@ -33,12 +34,20 @@ const PopularClasses = () => {
         heading={'Featured on this month'}
         subHeading={'popular classes'}></SectionTitle>
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6">
-        {topClasses.map((classInfo) => (
-          <ClassCard
-            key={classInfo._id}
-            classInfo={classInfo}
-          />
-        ))}
+        {isLoading ? (
+          <>
+            <SkeletonLoader></SkeletonLoader>
+            <SkeletonLoader></SkeletonLoader>
+            <SkeletonLoader></SkeletonLoader>
+          </>
+        ) : (
+          topClasses.map((classInfo) => (
+            <ClassCard
+              key={classInfo._id}
+              classInfo={classInfo}
+            />
+          ))
+        )}
       </div>
       <Link
         to={'/classes'}

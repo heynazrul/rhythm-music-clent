@@ -2,8 +2,18 @@ import { LuUsers } from 'react-icons/lu';
 import { RiFileList2Line } from 'react-icons/ri';
 import { BiRightArrowAlt } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import useAdmin from '../../hooks/useAdmin';
+import useInstructor from '../../hooks/useInstructor';
+
+import useEnroll from '../../hooks/useEnroll';
 
 const ClassCard = ({ classInfo }) => {
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
+
+  const { handleEnroll } = useEnroll();
+
+
   return (
     <div className="card w-full sm:max-w-96 bg-base-100 shadow-xl mx-auto group">
       <figure className="h-64">
@@ -57,7 +67,10 @@ const ClassCard = ({ classInfo }) => {
           </div>
         </div>
         <div className="card-actions card justify-start">
-          <Link to={'classes'} className="btn btn-sm btn-primary btn-outline ">
+          <Link
+            onClick={() => handleEnroll(classInfo)}
+            disabled={isAdmin || isInstructor}
+            className="btn btn-sm btn-primary btn-outline ">
             Enroll Now <BiRightArrowAlt></BiRightArrowAlt>
           </Link>
         </div>

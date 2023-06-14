@@ -9,7 +9,7 @@ const EnrolledClasses = () => {
   const [axiosSecure] = useAxiosSecure();
 
   const { data: classes = [] } = useQuery(['classes'], async () => {
-    const res = await axiosSecure.get(`http://localhost:5000/student/enrolled-classes/${user.email}`);
+    const res = await axiosSecure.get(`/student/enrolled-classes/${user.email}`);
     return res.data;
   });
   return (
@@ -31,7 +31,7 @@ const EnrolledClasses = () => {
         </thead>
         <tbody>
           {classes.map((item, idx) => (
-            <tr key={item.key}>
+            <tr key={item._id}>
               <th>{idx + 1}</th>
               <td>
                 <div className="avatar">

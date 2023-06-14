@@ -13,7 +13,7 @@ const ClassCard = ({ item }) => {
   const { handleEnroll } = useEnroll();
 
   return (
-    <div className="card max-w-96 bg-base-100 shadow-xl mx-auto group">
+    <div className={`card max-w-96 bg-base-100 shadow-xl mx-auto group ${seats === 0 && 'bg-red-300'}`}>
       <figure className="h-64">
         <img
           src={
@@ -25,7 +25,7 @@ const ClassCard = ({ item }) => {
           className="group-hover:scale-110 h-full w-full transition-all duration-500 object-cover object-center"
         />
       </figure>
-      <div className="card-body p-6 space-y-2">
+      <div className={`card-body p-6 space-y-2 `}>
         <h2 className="card-title">
           {name}
           <div className="badge badge-secondary">NEW</div>
@@ -42,7 +42,7 @@ const ClassCard = ({ item }) => {
         <div className="card-actions justify-start">
           <button
             onClick={() => handleEnroll(item)}
-            disabled={isAdmin || isInstructor}
+            disabled={isAdmin || isInstructor || seats === 0}
             className="btn btn-sm btn-primary btn-outline ">
             Enroll Now <BiRightArrowAlt></BiRightArrowAlt>
           </button>

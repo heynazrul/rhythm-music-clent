@@ -6,16 +6,27 @@ import useAuth from '../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const SelectedClasses = () => {
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
 
-  const { data: classes = [] } = useQuery(['classes'], async () => {
+  const { data: classes = [], refetch } = useQuery(['classes'], async () => {
     const res = await axiosSecure.get(`/users/selectedClassId/${user.email}`);
     return res.data;
     // return res.json();
   });
+
+  console.log(classes);
+
+  const handleDelete = async (item) => {
+    const res = await axiosSecure.delete(`/users/selectedClassId/${user.email}/${item._id}`);
+    if (res.data.modifiedCount) {
+      refetch();
+      toast.success(`${item.name} removed from your wish list`);
+    }
+  };
 
   return (
     <div className="overflow-x-auto w-full px-4">
@@ -89,7 +100,9 @@ const SelectedClasses = () => {
                     <BsFillCreditCard2BackFill></BsFillCreditCard2BackFill> Pay
                   </button>
                 </Link>
-                <button className="btn btn-error btn-sm">
+                <button
+                  onClick={() => handleDelete(item)}
+                  className="btn btn-error btn-sm">
                   <MdError></MdError> Delete
                 </button>
               </th>

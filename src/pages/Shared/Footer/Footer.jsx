@@ -26,10 +26,10 @@ const Footer = ({ currentTheme }) => {
         {/* TODO: update footer menu link and social icons */}
         <div>
           <span className="footer-title">Services</span>
-          <Link className="link link-hover">Branding</Link>
-          <Link className="link link-hover">Design</Link>
-          <Link className="link link-hover">Marketing</Link>
-          <Link className="link link-hover">Advertisement</Link>
+          <Link className="link link-hover">Bootcamp</Link>
+          <Link className="link link-hover">Summer Camp</Link>
+          <Link className="link link-hover">Guitar Learn</Link>
+          <Link className="link link-hover">Drums lesson</Link>
         </div>
         <div>
           <span className="footer-title">Company</span>

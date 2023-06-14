@@ -13,6 +13,7 @@ const MyClasses = () => {
     return res.data;
     // return res.json();
   });
+  console.log(classes);
   return (
     <div className="overflow-x-auto w-full px-4">
       <Helmet>
@@ -76,7 +77,7 @@ const MyClasses = () => {
               <td>
                 <p className="">
                   {item.status === 'pending' || item.status === 'approved'
-                    ? ''
+                    ? 'Not applicable'
                     : item?.feedback
                     ? item.feedback
                     : 'N/A'}

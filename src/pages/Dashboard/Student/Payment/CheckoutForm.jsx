@@ -2,6 +2,8 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 // import './CheckoutForm.css';
 
 const CheckoutForm = ({ price, item }) => {
@@ -9,6 +11,7 @@ const CheckoutForm = ({ price, item }) => {
   const elements = useElements();
   const [axiosSecure] = useAxiosSecure();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [cardError, setCardError] = useState('');
   const [clientSecret, setClientSecret] = useState('');
@@ -78,9 +81,9 @@ const CheckoutForm = ({ price, item }) => {
         price,
       };
       axiosSecure.post('/student/payments', payment).then((res) => {
-        console.log(res.data);
         if (res.data.insertedId) {
-          // display confrim
+          toast.success('Payment successful!');
+          navigate('/dashboard/selected-classes');
         }
       });
     }

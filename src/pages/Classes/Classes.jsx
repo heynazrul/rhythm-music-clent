@@ -2,9 +2,10 @@ import { Helmet } from 'react-helmet-async';
 import PageCover from '../Shared/PageCover/PageCover';
 import ClassCard from './ClassCard';
 import { useQuery } from '@tanstack/react-query';
+import SkeletonLoader from '../../components/SkeletonLoader/SkeletonLoader';
 
 const Classes = () => {
-  const { data: classes = [] } = useQuery(['classes'], async () => {
+  const { data: classes = [], isLoading } = useQuery(['classes'], async () => {
     const res = await fetch(`http://localhost:5000/approved-classes`);
     return res.json();
   });
@@ -20,11 +21,19 @@ const Classes = () => {
         title={'Courses we offer'}
         subTitle={'Explore our wide range of classes'}></PageCover>
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-6 my-12">
-        {classes.map((item) => (
-          <ClassCard
-            key={item._id}
-            item={item}></ClassCard>
-        ))}
+        {isLoading ? (
+          <>
+            <SkeletonLoader></SkeletonLoader>
+            <SkeletonLoader></SkeletonLoader>
+            <SkeletonLoader></SkeletonLoader>
+          </>
+        ) : (
+          classes.map((item) => (
+            <ClassCard
+              key={item._id}
+              item={item}></ClassCard>
+          ))
+        )}
       </div>
     </div>
   );

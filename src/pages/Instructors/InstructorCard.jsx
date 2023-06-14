@@ -1,8 +1,7 @@
 import { FaEnvelope } from 'react-icons/fa';
 import { MdOutlinePlayLesson } from 'react-icons/md';
 
-const InstructorCard = ({instructor}) => {
-  console.log(instructor);
+const InstructorCard = ({ instructor }) => {
   return (
     <div className="card card-compact group mx-auto min-w-max max-w-sm bg-base-100 shadow-lg overflow-hidden w-full">
       <figure>
@@ -20,7 +19,7 @@ const InstructorCard = ({instructor}) => {
         <h2 className="card-title">{instructor.name}</h2>
         <div className="flex gap-2 items-center">
           <FaEnvelope></FaEnvelope>
-          <p>demo@demo.com</p>
+          <p>{instructor.email}</p>
         </div>
         <div className="flex gap-2 items-center">
           <MdOutlinePlayLesson></MdOutlinePlayLesson>

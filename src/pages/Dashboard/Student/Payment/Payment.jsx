@@ -7,10 +7,9 @@ import { useLocation } from 'react-router-dom';
 
 const Payment = () => {
   const location = useLocation();
-  console.log(location);
   const { item } = location.state;
 
-  const price = parseFloat(item.price)
+  const price = parseFloat(item.price);
 
   const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
@@ -28,9 +27,16 @@ const Payment = () => {
           />
         </figure>
         <div className="card-body">
-          <h2 className="text-center font-semibold text-2xl">Make Payment</h2>
+          <div className="text-center pb-6">
+            <h2 className=" font-semibold text-2xl pb-2">Make Payment</h2>
+            <p>
+              Total Amount will be charged: <span className="font-semibold">{price}</span>
+            </p>
+          </div>
           <Elements stripe={stripePromise}>
-            <CheckoutForm price={price} item={item}></CheckoutForm>
+            <CheckoutForm
+              price={price}
+              item={item}></CheckoutForm>
           </Elements>
           {/* <form
             onSubmit={handleSubmit(onSubmit)}

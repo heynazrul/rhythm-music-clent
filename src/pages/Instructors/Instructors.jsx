@@ -7,7 +7,6 @@ import SkeletonLoader from '../../components/SkeletonLoader/SkeletonLoader';
 const Instructors = () => {
   const { data: instructors = [], isLoading } = useQuery(['instructors'], async () => {
     const res = await fetch(`http://localhost:5000/instructors`);
-    console.log(res);
     return res.json();
   });
   // const [instructors, setInstructors] = useState([]);

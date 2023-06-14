@@ -30,7 +30,7 @@ const ParalaxTestimonial = () => {
           modules={[Pagination, Navigation, Autoplay]}
           className="mySwiper">
           <SwiperSlide>
-            <div className="max-w-3xl mx-auto py-40">
+            <div className="max-w-3xl mx-auto py-40 px-2">
               <figure>
                 <blockquote>
                   <p className=" text-gray-300 text-xl text-center font-semibold sm:text-2xl">
@@ -54,7 +54,7 @@ const ParalaxTestimonial = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="max-w-3xl mx-auto py-40">
+            <div className="max-w-3xl mx-auto py-40 px-2">
               <figure>
                 <blockquote>
                   <p className=" text-gray-300 text-xl text-center font-semibold sm:text-2xl">
@@ -78,7 +78,7 @@ const ParalaxTestimonial = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="max-w-3xl mx-auto py-40">
+            <div className="max-w-3xl mx-auto py-40 px-2">
               <figure>
                 <blockquote>
                   <p className=" text-gray-300 text-xl text-center font-semibold sm:text-2xl">

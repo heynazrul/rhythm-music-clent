@@ -5,8 +5,8 @@ import iconDark from '../../../assets/logo/fav-icon-dark.svg';
 
 const Footer = ({ currentTheme }) => {
   return (
-    <footer className="  bg-base-200 text-base-content ">
-      <div className="footer max-w-7xl mx-auto py-10">
+    <footer className="  bg-base-200 text-base-content">
+      <div className="footer max-w-7xl mx-auto py-10 px-2">
         <div>
           <Link
             to={'/'}

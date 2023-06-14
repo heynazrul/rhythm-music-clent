@@ -4,7 +4,7 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 // import instructorBG from '../../../assets/home-bg.jpg'
 
 const PopularInstructors = () => {
-  const { data: instructorsData = [], isLoading } = useQuery(['instructors'], async () => {
+  const { data: instructorsData = [] } = useQuery(['instructors'], async () => {
     const res = await fetch(`http://localhost:5000/instructors`);
     return res.json();
   });

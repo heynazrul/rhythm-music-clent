@@ -25,7 +25,7 @@ const Banner = () => {
         effect={'fade'}
         autoplay={{
           delay: 6000,
-          disableOnInteraction: true,
+          disableOnInteraction: false,
         }}
         loop={true}
         pagination={{

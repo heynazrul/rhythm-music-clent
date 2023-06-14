@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SkeletonLoader from '../../../components/SkeletonLoader/SkeletonLoader';
 
+
 const PopularClasses = () => {
   const { data: classes = [], isLoading } = useQuery(['classes'], async () => {
     const res = await fetch(`http://localhost:5000/approved-classes`);

@@ -29,7 +29,7 @@ const SocialLogin = () => {
           role: 'student',
           selectedClassId: [],
         };
-        fetch('http://localhost:5000/users', {
+        fetch('https://rhythm-music-server.vercel.app/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',

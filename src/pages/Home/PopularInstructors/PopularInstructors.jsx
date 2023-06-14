@@ -5,7 +5,7 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 
 const PopularInstructors = () => {
   const { data: instructorsData = [] } = useQuery(['instructors'], async () => {
-    const res = await fetch(`http://localhost:5000/instructors`);
+    const res = await fetch(`https://rhythm-music-server.vercel.app/instructors`);
     return res.json();
   });
 

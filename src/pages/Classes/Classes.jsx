@@ -6,7 +6,7 @@ import SkeletonLoader from '../../components/SkeletonLoader/SkeletonLoader';
 
 const Classes = () => {
   const { data: classes = [], isLoading } = useQuery(['classes'], async () => {
-    const res = await fetch(`http://localhost:5000/approved-classes`);
+    const res = await fetch(`https://rhythm-music-server.vercel.app/approved-classes`);
     return res.json();
   });
   return (

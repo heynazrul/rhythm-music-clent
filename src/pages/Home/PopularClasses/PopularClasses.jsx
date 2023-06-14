@@ -6,10 +6,9 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SkeletonLoader from '../../../components/SkeletonLoader/SkeletonLoader';
 
-
 const PopularClasses = () => {
   const { data: classes = [], isLoading } = useQuery(['classes'], async () => {
-    const res = await fetch(`http://localhost:5000/approved-classes`);
+    const res = await fetch(`https://rhythm-music-server.vercel.app/approved-classes`);
     return res.json();
   });
   const [topClasses, setTopClasses] = useState([]);

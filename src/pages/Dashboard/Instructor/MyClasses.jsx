@@ -9,7 +9,7 @@ const MyClasses = () => {
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const { data: classes = [] } = useQuery(['classes'], async () => {
-    const res = await axiosSecure.get(`http://localhost:5000/instructor/my-classes/${user.email}`);
+    const res = await axiosSecure.get(`https://rhythm-music-server.vercel.app/instructor/my-classes/${user.email}`);
     return res.data;
     // return res.json();
   });

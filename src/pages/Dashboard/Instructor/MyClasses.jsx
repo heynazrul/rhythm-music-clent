@@ -1,10 +1,18 @@
 import { Helmet } from 'react-helmet-async';
-import useClass from '../../../hooks/useClass';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const MyClasses = () => {
-  const [classes, , refetch] = useClass();
-
+  // const [classes, , refetch] = useClass();
+  const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+  const { data: classes = [] } = useQuery(['classes'], async () => {
+    const res = await axiosSecure.get(`http://localhost:5000/instructor/my-classes/${user.email}`);
+    return res.data;
+    // return res.json();
+  });
   return (
     <div className="overflow-x-auto w-full px-4">
       <Helmet>

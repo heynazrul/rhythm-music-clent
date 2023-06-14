@@ -13,7 +13,7 @@ const SelectedClasses = () => {
 
   // TODO: Check why showing data initially from enrolled class when click selected class
   const { data: classes = [] } = useQuery(['classes'], async () => {
-    const res = await axiosSecure.get(`https://rhythm-music-server.vercel.app/users/selectedClassId/${user.email}`);
+    const res = await axiosSecure.get(`http://localhost:5000/users/selectedClassId/${user.email}`);
     return res.data;
     // return res.json();
   });

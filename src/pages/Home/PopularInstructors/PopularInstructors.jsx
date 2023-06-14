@@ -1,9 +1,10 @@
 import PopularInstructorCard from '../../../components/PopularInstructorCard/PopularInstructorCard';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
+// import instructorBG from '../../../assets/home-bg.jpg'
 
 const PopularInstructors = () => {
   return (
-    <section>
+    <section className="bg-[url('https://eduvibe.devsvibe.com/main/wp-content/uploads/2023/02/home-one-service-2.jpg')] py-20">
       <SectionTitle
         heading={'Meet our instructors'}
         subHeading={'Skilled Instructors'}></SectionTitle>

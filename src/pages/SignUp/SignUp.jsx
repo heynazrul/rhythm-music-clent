@@ -39,7 +39,7 @@ const SignUp = () => {
             role: 'student',
             selectedClassId: [],
           };
-          fetch('https://rhythm-music-server.vercel.app/users', {
+          fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
               'content-type': 'application/json',

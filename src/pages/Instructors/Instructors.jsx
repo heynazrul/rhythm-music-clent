@@ -6,14 +6,14 @@ import SkeletonLoader from '../../components/SkeletonLoader/SkeletonLoader';
 
 const Instructors = () => {
   const { data: instructors = [], isLoading } = useQuery(['instructors'], async () => {
-    const res = await fetch(`https://rhythm-music-server.vercel.app/instructors`);
+    const res = await fetch(`http://localhost:5000/instructors`);
     console.log(res);
     return res.json();
   });
   // const [instructors, setInstructors] = useState([]);
 
   // useEffect(() => {
-  //   fetch('https://rhythm-music-server.vercel.app/instructors')
+  //   fetch('http://localhost:5000/instructors')
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setInstructors(data);

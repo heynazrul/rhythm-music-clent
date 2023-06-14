@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const Classes = () => {
   const { data: classes = [] } = useQuery(['classes'], async () => {
-    const res = await fetch(`https://rhythm-music-server.vercel.app/approved-classes`);
+    const res = await fetch(`http://localhost:5000/approved-classes`);
     return res.json();
   });
   return (
